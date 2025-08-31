@@ -6,7 +6,6 @@ import logging
 import html
 from typing import List, Dict, Optional, Union, Any, Tuple
 from pathlib import Path
-from dotenv import load_dotenv
 import requests
 from bs4 import BeautifulSoup
 from pypdf import PdfReader
@@ -1388,7 +1387,7 @@ def main():
         margin: auto;
     }
     .assistant-message {
-        background: white;
+        background: white
         color: #1e293b;
         font-weight: bold;
         font-style: italic;
@@ -1944,5 +1943,4 @@ def main():
         st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
-    load_dotenv()
     main()
