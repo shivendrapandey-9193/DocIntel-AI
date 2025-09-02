@@ -28,6 +28,7 @@ from cachetools import TTLCache
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import platform  # Added to detect OS for Tesseract path
 
 # Optional imports
 try:
@@ -142,8 +143,11 @@ if not logger.handlers:
     logger.addHandler(fh)
     logger.addHandler(sh)
 
-# Set Tesseract path
-TESSERACT_PATH = os.getenv("TESSERACT_PATH", r"C:\Program Files\Tesseract-OCR\tesseract.exe")
+# Set Tesseract path dynamically based on OS
+if platform.system() == 'Linux':
+    TESSERACT_PATH = os.getenv("TESSERACT_PATH", "/usr/bin/tesseract")
+else:
+    TESSERACT_PATH = os.getenv("TESSERACT_PATH", r"C:\Program Files\Tesseract-OCR\tesseract.exe")
 try:
     pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
     if not os.path.exists(TESSERACT_PATH):
